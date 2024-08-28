@@ -1,17 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:routin_e/const/colors.dart';
 import 'package:routin_e/screen/exercise_screen.dart';
-
 import 'const/texts.dart';
 
-/*void main() {
-  runApp(
-    MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
-    )
-  );
-}*/
 
 void main() {
   runApp(MyApp());
@@ -57,8 +48,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         centerTitle: true,
         title: Text(APP_NAME, style: TextStyle(color: ORANGE_COLOR, fontSize: 32.0, fontWeight: FontWeight.w600),),
       ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
+      resizeToAvoidBottomInset: false,
+      body: SingleChildScrollView(
+        child: Center(
+          child: _widgetOptions.elementAt(_selectedIndex),
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: [

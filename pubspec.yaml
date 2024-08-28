@@ -37,7 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.6
 
   table_calendar: ^3.1.2 # 달력 기능을 제공
-  intl: ^0.19.0 # 다국어화 기능을 제공
+  intl: any # 다국어화 기능을 제공
 
   drift: ^2.19.1+1 # Drift
   sqlite3_flutter_libs: ^0.5.24 # SQLite
@@ -49,6 +49,9 @@ dependencies:
 
   dio: ^5.6.0 # 네트워크 요청을 가능하게 하는 플러그인
   uuid: ^4.4.2 # UUID를 생성하는 플러그인
+  flutter_localizations:
+    sdk: flutter
+
 
 #  firebase_core: ^3.3.0
 #  cloud_firestore: ^5.2.1
