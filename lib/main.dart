@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:routin_e/const/colors.dart';
+import 'package:routin_e/screen/exercise_screen.dart';
 
 import 'const/texts.dart';
 
@@ -17,7 +18,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  static const String _title = 'RoutinE';
+  static const String _title = APP_NAME;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -39,8 +40,8 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
   List<Widget> _widgetOptions = [
-    Text('exercise'),
-    Text('record'),
+    ExerciseScreen(),
+    Text('기록'), // RecordScreen(),
   ];
 
   void _onItemTapped(int index){
