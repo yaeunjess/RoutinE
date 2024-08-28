@@ -37,7 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.6
 
   table_calendar: ^3.1.2 # 달력 기능을 제공
-  intl: any # 다국어화 기능을 제공
+#  intl: any # 다국어화 기능을 제공
 
   drift: ^2.19.1+1 # Drift
   sqlite3_flutter_libs: ^0.5.24 # SQLite
@@ -49,7 +49,6 @@ dependencies:
 
   dio: ^5.6.0 # 네트워크 요청을 가능하게 하는 플러그인
   uuid: ^4.4.2 # UUID를 생성하는 플러그인
-  carousel_slider: ^5.0.0
   flutter_localizations:
     sdk: flutter
 
@@ -112,3 +111,24 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  fonts:
+    - family: NotoSansKR
+      fonts:
+        - asset: assets/fonts/NotoSansKR-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/NotoSansKR-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/NotoSansKR-Light.ttf
+          weight: 300
+        - asset: assets/fonts/NotoSansKR-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/NotoSansKR-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/NotoSansKR-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/NotoSansKR-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/NotoSansKR-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/NotoSansKR-Black.ttf
+          weight: 900
