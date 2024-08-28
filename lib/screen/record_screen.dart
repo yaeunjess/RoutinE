@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:routin_e/component/excercise_card.dart';
-import 'package:routin_e/const/colors.dart';
 import '../component/calendar.dart';
 import '../component/routine_record.dart';
 

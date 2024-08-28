@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:routin_e/const/colors.dart';
 import 'package:routin_e/screen/exercise_screen.dart';
+import 'package:routin_e/screen/record_screen.dart';
 import 'const/texts.dart';
 
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // await initializeDateFormatting();
+
   runApp(MyApp());
 }
 
@@ -32,7 +36,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
   List<Widget> _widgetOptions = [
     ExerciseScreen(),
-    Text('기록'), // RecordScreen(),
+    RecordScreen(),
   ];
 
   void _onItemTapped(int index){
@@ -48,11 +52,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         centerTitle: true,
         title: Text(APP_NAME, style: TextStyle(color: ORANGE_COLOR, fontSize: 32.0, fontWeight: FontWeight.w600),),
       ),
-      resizeToAvoidBottomInset: false,
-      body: SingleChildScrollView(
-        child: Center(
-          child: _widgetOptions.elementAt(_selectedIndex),
-        ),
+      // resizeToAvoidBottomInset: false,
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: [

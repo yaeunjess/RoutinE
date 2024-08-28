@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:routin_e/component/routine_card.dart';
-import 'package:routin_e/const/colors.dart';
 
 class ExerciseScreen extends StatefulWidget {
   const ExerciseScreen({super.key});

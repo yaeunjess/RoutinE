@@ -1,4 +1,3 @@
-import 'package:drift/drift.dart';
 import 'package:flutter/material.dart';
 import 'package:routin_e/const/colors.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -31,7 +30,7 @@ class Calendar extends StatelessWidget {
             fontWeight: FontWeight.w700,
             fontSize: 16.0,
           )),
-      locale: 'ko_KR',
+      // locale: 'ko_KR',
       calendarStyle: CalendarStyle(
         selectedDecoration: BoxDecoration( // 선택된 날짜는 주황색으로 표시해주기
             color: ORANGE_COLOR,
