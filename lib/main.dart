@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:routin_e/const/colors.dart';
+import 'package:routin_e/database/drift_database.dart';
 import 'package:routin_e/screen/exercise_screen.dart';
 import 'package:routin_e/screen/record_screen.dart';
 import 'const/texts.dart';
+import 'package:get_it/get_it.dart';
 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await initializeDateFormatting();
+
+  final database = AppDatabase(); //데이터베이스 생성
+  GetIt.I.registerSingleton<AppDatabase>(database);
 
   runApp(MyApp());
 }
@@ -54,7 +59,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       ),
       // resizeToAvoidBottomInset: false,
       body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
+        child: _widgetOptions.elementAt(_selectedIndex), // Add some space
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: [
