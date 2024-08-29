@@ -26,8 +26,7 @@ class _RecordScreenState extends State<RecordScreen> {
   @override
   Widget build(BuildContext context) {
 
-    return SafeArea(
-      child: Column(
+    return Column(
         children: [
           Calendar(
             selectedDate: selectedDate,
@@ -49,8 +48,7 @@ class _RecordScreenState extends State<RecordScreen> {
             ),
           ),
         ],
-      ),
-    );
+      );
   }
 
   void onDaySelected(DateTime touchedDate, DateTime focusedDate) {
