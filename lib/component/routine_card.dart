@@ -3,14 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:routin_e/const/colors.dart';
 
 class RoutineCard extends StatelessWidget {
-  final cardColor;
-  final width;
-  final height;
+  final Color cardColor;
+  final double width;
+  final double height;
+  final String routineTitle;
+  final List<String> exerciseTitles;
 
   const RoutineCard({
     this.width = 342.0,
     this.height = 72.0,
     this.cardColor = BEIGE_COLOR,
+    required this.routineTitle,
+    required this.exerciseTitles,
     super.key,
   });
 
@@ -34,7 +38,7 @@ class RoutineCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: Text(
-                  '등운동',
+                  routineTitle,
                   style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20.0),
                   textAlign: TextAlign.right,
                 ),
@@ -47,9 +51,13 @@ class RoutineCard extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(4.0),
-            child: Text(
-              '기립근, 승모근, 광배근',
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 12.0, color: GREY_COLOR),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: exerciseTitles.map((title) => Text(
+                title,
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 12.0, color: GREY_COLOR),
+              )).toList(),
             ),
           ),
         ],
