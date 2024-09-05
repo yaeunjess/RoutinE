@@ -30,6 +30,12 @@ class _CustomYoutubePlayerState extends State<CustomYoutubePlayer> {
     );
   }
 
+  @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
+  }
+
   String _extractVideoId(String? videoURL) {
     final Uri uri = Uri.parse(videoURL!);
     if (uri.host.contains('youtu.be')) {
