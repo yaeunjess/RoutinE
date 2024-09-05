@@ -39,6 +39,7 @@ class Records extends Table {
   TextColumn get id => text()();
   DateTimeColumn get date => dateTime()();
   TextColumn get routineTitle => text()();
+  TextColumn get tempRoutineId => text()();// add this line
   TextColumn get exerciseTitle => text()();
   TextColumn get counterType => textEnum<CounterType>()();
   TextColumn get achievementCounts => text().nullable()();
@@ -46,7 +47,6 @@ class Records extends Table {
   @override
   Set<Column> get primaryKey => {id};
 }
-
 
 // DriftDatabase 클래스 정의
 @DriftDatabase(tables: [Exercises, Routines, Records])
