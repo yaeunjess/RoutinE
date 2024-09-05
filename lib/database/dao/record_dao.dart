@@ -12,12 +12,13 @@ class RecordDao extends DatabaseAccessor<AppDatabase> with _$RecordDaoMixin {
   Future<int> insertRecord(RecordsCompanion record) => into(records).insert(record);
 
   // Record 가져오기
-  Future<Record?> getRecordById(String id) {
-    return (select(records)..where((tbl) => tbl.id.equals(id))).getSingleOrNull();
+  Future<Record?> getRecordBytempRoutineId(String id) {
+    return (select(records)..where((tbl) => tbl.tempRoutineId.equals(id))).getSingleOrNull();
   }
 
-  // 모든 Record 가져오기
-  // Future<List<Record>> getAllRecords() => select(records).get();
+
+  //  모든 Record 가져오기
+  Future<List<Record>> getAllRecords() => select(records).get();
 
   // 특정 날짜에 해당하는 Record 가져오기
   Future<List<Record>> getRecordsByDate(DateTime date) {
@@ -25,6 +26,7 @@ class RecordDao extends DatabaseAccessor<AppDatabase> with _$RecordDaoMixin {
       ..where((tbl) => tbl.date.equals(date))
     ).get();
   }
+
 
   // 특정 날짜에 해당하는 Record Length 가져오기 : 캘린더에 색상 표기를 위함
   Future<int> getRecordLengthByDate(DateTime date) {

@@ -704,6 +704,12 @@ class $RecordsTable extends Records with TableInfo<$RecordsTable, Record> {
   late final GeneratedColumn<String> routineTitle = GeneratedColumn<String>(
       'routine_title', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _tempRoutineIdMeta =
+      const VerificationMeta('tempRoutineId');
+  @override
+  late final GeneratedColumn<String> tempRoutineId = GeneratedColumn<String>(
+      'temp_routine_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _exerciseTitleMeta =
       const VerificationMeta('exerciseTitle');
   @override
@@ -724,8 +730,15 @@ class $RecordsTable extends Records with TableInfo<$RecordsTable, Record> {
       GeneratedColumn<String>('achievement_counts', aliasedName, true,
           type: DriftSqlType.string, requiredDuringInsert: false);
   @override
-  List<GeneratedColumn> get $columns =>
-      [id, date, routineTitle, exerciseTitle, counterType, achievementCounts];
+  List<GeneratedColumn> get $columns => [
+        id,
+        date,
+        routineTitle,
+        tempRoutineId,
+        exerciseTitle,
+        counterType,
+        achievementCounts
+      ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -754,6 +767,14 @@ class $RecordsTable extends Records with TableInfo<$RecordsTable, Record> {
               data['routine_title']!, _routineTitleMeta));
     } else if (isInserting) {
       context.missing(_routineTitleMeta);
+    }
+    if (data.containsKey('temp_routine_id')) {
+      context.handle(
+          _tempRoutineIdMeta,
+          tempRoutineId.isAcceptableOrUnknown(
+              data['temp_routine_id']!, _tempRoutineIdMeta));
+    } else if (isInserting) {
+      context.missing(_tempRoutineIdMeta);
     }
     if (data.containsKey('exercise_title')) {
       context.handle(
@@ -785,6 +806,8 @@ class $RecordsTable extends Records with TableInfo<$RecordsTable, Record> {
           .read(DriftSqlType.dateTime, data['${effectivePrefix}date'])!,
       routineTitle: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}routine_title'])!,
+      tempRoutineId: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}temp_routine_id'])!,
       exerciseTitle: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}exercise_title'])!,
       counterType: $RecordsTable.$convertercounterType.fromSql(attachedDatabase
@@ -808,6 +831,7 @@ class Record extends DataClass implements Insertable<Record> {
   final String id;
   final DateTime date;
   final String routineTitle;
+  final String tempRoutineId;
   final String exerciseTitle;
   final CounterType counterType;
   final String? achievementCounts;
@@ -815,6 +839,7 @@ class Record extends DataClass implements Insertable<Record> {
       {required this.id,
       required this.date,
       required this.routineTitle,
+      required this.tempRoutineId,
       required this.exerciseTitle,
       required this.counterType,
       this.achievementCounts});
@@ -824,6 +849,7 @@ class Record extends DataClass implements Insertable<Record> {
     map['id'] = Variable<String>(id);
     map['date'] = Variable<DateTime>(date);
     map['routine_title'] = Variable<String>(routineTitle);
+    map['temp_routine_id'] = Variable<String>(tempRoutineId);
     map['exercise_title'] = Variable<String>(exerciseTitle);
     {
       map['counter_type'] = Variable<String>(
@@ -840,6 +866,7 @@ class Record extends DataClass implements Insertable<Record> {
       id: Value(id),
       date: Value(date),
       routineTitle: Value(routineTitle),
+      tempRoutineId: Value(tempRoutineId),
       exerciseTitle: Value(exerciseTitle),
       counterType: Value(counterType),
       achievementCounts: achievementCounts == null && nullToAbsent
@@ -855,6 +882,7 @@ class Record extends DataClass implements Insertable<Record> {
       id: serializer.fromJson<String>(json['id']),
       date: serializer.fromJson<DateTime>(json['date']),
       routineTitle: serializer.fromJson<String>(json['routineTitle']),
+      tempRoutineId: serializer.fromJson<String>(json['tempRoutineId']),
       exerciseTitle: serializer.fromJson<String>(json['exerciseTitle']),
       counterType: $RecordsTable.$convertercounterType
           .fromJson(serializer.fromJson<String>(json['counterType'])),
@@ -869,6 +897,7 @@ class Record extends DataClass implements Insertable<Record> {
       'id': serializer.toJson<String>(id),
       'date': serializer.toJson<DateTime>(date),
       'routineTitle': serializer.toJson<String>(routineTitle),
+      'tempRoutineId': serializer.toJson<String>(tempRoutineId),
       'exerciseTitle': serializer.toJson<String>(exerciseTitle),
       'counterType': serializer.toJson<String>(
           $RecordsTable.$convertercounterType.toJson(counterType)),
@@ -880,6 +909,7 @@ class Record extends DataClass implements Insertable<Record> {
           {String? id,
           DateTime? date,
           String? routineTitle,
+          String? tempRoutineId,
           String? exerciseTitle,
           CounterType? counterType,
           Value<String?> achievementCounts = const Value.absent()}) =>
@@ -887,6 +917,7 @@ class Record extends DataClass implements Insertable<Record> {
         id: id ?? this.id,
         date: date ?? this.date,
         routineTitle: routineTitle ?? this.routineTitle,
+        tempRoutineId: tempRoutineId ?? this.tempRoutineId,
         exerciseTitle: exerciseTitle ?? this.exerciseTitle,
         counterType: counterType ?? this.counterType,
         achievementCounts: achievementCounts.present
@@ -900,6 +931,9 @@ class Record extends DataClass implements Insertable<Record> {
       routineTitle: data.routineTitle.present
           ? data.routineTitle.value
           : this.routineTitle,
+      tempRoutineId: data.tempRoutineId.present
+          ? data.tempRoutineId.value
+          : this.tempRoutineId,
       exerciseTitle: data.exerciseTitle.present
           ? data.exerciseTitle.value
           : this.exerciseTitle,
@@ -917,6 +951,7 @@ class Record extends DataClass implements Insertable<Record> {
           ..write('id: $id, ')
           ..write('date: $date, ')
           ..write('routineTitle: $routineTitle, ')
+          ..write('tempRoutineId: $tempRoutineId, ')
           ..write('exerciseTitle: $exerciseTitle, ')
           ..write('counterType: $counterType, ')
           ..write('achievementCounts: $achievementCounts')
@@ -925,8 +960,8 @@ class Record extends DataClass implements Insertable<Record> {
   }
 
   @override
-  int get hashCode => Object.hash(
-      id, date, routineTitle, exerciseTitle, counterType, achievementCounts);
+  int get hashCode => Object.hash(id, date, routineTitle, tempRoutineId,
+      exerciseTitle, counterType, achievementCounts);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -934,6 +969,7 @@ class Record extends DataClass implements Insertable<Record> {
           other.id == this.id &&
           other.date == this.date &&
           other.routineTitle == this.routineTitle &&
+          other.tempRoutineId == this.tempRoutineId &&
           other.exerciseTitle == this.exerciseTitle &&
           other.counterType == this.counterType &&
           other.achievementCounts == this.achievementCounts);
@@ -943,6 +979,7 @@ class RecordsCompanion extends UpdateCompanion<Record> {
   final Value<String> id;
   final Value<DateTime> date;
   final Value<String> routineTitle;
+  final Value<String> tempRoutineId;
   final Value<String> exerciseTitle;
   final Value<CounterType> counterType;
   final Value<String?> achievementCounts;
@@ -951,6 +988,7 @@ class RecordsCompanion extends UpdateCompanion<Record> {
     this.id = const Value.absent(),
     this.date = const Value.absent(),
     this.routineTitle = const Value.absent(),
+    this.tempRoutineId = const Value.absent(),
     this.exerciseTitle = const Value.absent(),
     this.counterType = const Value.absent(),
     this.achievementCounts = const Value.absent(),
@@ -960,6 +998,7 @@ class RecordsCompanion extends UpdateCompanion<Record> {
     required String id,
     required DateTime date,
     required String routineTitle,
+    required String tempRoutineId,
     required String exerciseTitle,
     required CounterType counterType,
     this.achievementCounts = const Value.absent(),
@@ -967,12 +1006,14 @@ class RecordsCompanion extends UpdateCompanion<Record> {
   })  : id = Value(id),
         date = Value(date),
         routineTitle = Value(routineTitle),
+        tempRoutineId = Value(tempRoutineId),
         exerciseTitle = Value(exerciseTitle),
         counterType = Value(counterType);
   static Insertable<Record> custom({
     Expression<String>? id,
     Expression<DateTime>? date,
     Expression<String>? routineTitle,
+    Expression<String>? tempRoutineId,
     Expression<String>? exerciseTitle,
     Expression<String>? counterType,
     Expression<String>? achievementCounts,
@@ -982,6 +1023,7 @@ class RecordsCompanion extends UpdateCompanion<Record> {
       if (id != null) 'id': id,
       if (date != null) 'date': date,
       if (routineTitle != null) 'routine_title': routineTitle,
+      if (tempRoutineId != null) 'temp_routine_id': tempRoutineId,
       if (exerciseTitle != null) 'exercise_title': exerciseTitle,
       if (counterType != null) 'counter_type': counterType,
       if (achievementCounts != null) 'achievement_counts': achievementCounts,
@@ -993,6 +1035,7 @@ class RecordsCompanion extends UpdateCompanion<Record> {
       {Value<String>? id,
       Value<DateTime>? date,
       Value<String>? routineTitle,
+      Value<String>? tempRoutineId,
       Value<String>? exerciseTitle,
       Value<CounterType>? counterType,
       Value<String?>? achievementCounts,
@@ -1001,6 +1044,7 @@ class RecordsCompanion extends UpdateCompanion<Record> {
       id: id ?? this.id,
       date: date ?? this.date,
       routineTitle: routineTitle ?? this.routineTitle,
+      tempRoutineId: tempRoutineId ?? this.tempRoutineId,
       exerciseTitle: exerciseTitle ?? this.exerciseTitle,
       counterType: counterType ?? this.counterType,
       achievementCounts: achievementCounts ?? this.achievementCounts,
@@ -1019,6 +1063,9 @@ class RecordsCompanion extends UpdateCompanion<Record> {
     }
     if (routineTitle.present) {
       map['routine_title'] = Variable<String>(routineTitle.value);
+    }
+    if (tempRoutineId.present) {
+      map['temp_routine_id'] = Variable<String>(tempRoutineId.value);
     }
     if (exerciseTitle.present) {
       map['exercise_title'] = Variable<String>(exerciseTitle.value);
@@ -1042,6 +1089,7 @@ class RecordsCompanion extends UpdateCompanion<Record> {
           ..write('id: $id, ')
           ..write('date: $date, ')
           ..write('routineTitle: $routineTitle, ')
+          ..write('tempRoutineId: $tempRoutineId, ')
           ..write('exerciseTitle: $exerciseTitle, ')
           ..write('counterType: $counterType, ')
           ..write('achievementCounts: $achievementCounts, ')
@@ -1375,6 +1423,7 @@ typedef $$RecordsTableCreateCompanionBuilder = RecordsCompanion Function({
   required String id,
   required DateTime date,
   required String routineTitle,
+  required String tempRoutineId,
   required String exerciseTitle,
   required CounterType counterType,
   Value<String?> achievementCounts,
@@ -1384,6 +1433,7 @@ typedef $$RecordsTableUpdateCompanionBuilder = RecordsCompanion Function({
   Value<String> id,
   Value<DateTime> date,
   Value<String> routineTitle,
+  Value<String> tempRoutineId,
   Value<String> exerciseTitle,
   Value<CounterType> counterType,
   Value<String?> achievementCounts,
@@ -1405,6 +1455,11 @@ class $$RecordsTableFilterComposer
 
   ColumnFilters<String> get routineTitle => $state.composableBuilder(
       column: $state.table.routineTitle,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get tempRoutineId => $state.composableBuilder(
+      column: $state.table.tempRoutineId,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
@@ -1441,6 +1496,11 @@ class $$RecordsTableOrderingComposer
 
   ColumnOrderings<String> get routineTitle => $state.composableBuilder(
       column: $state.table.routineTitle,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get tempRoutineId => $state.composableBuilder(
+      column: $state.table.tempRoutineId,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
@@ -1483,6 +1543,7 @@ class $$RecordsTableTableManager extends RootTableManager<
             Value<String> id = const Value.absent(),
             Value<DateTime> date = const Value.absent(),
             Value<String> routineTitle = const Value.absent(),
+            Value<String> tempRoutineId = const Value.absent(),
             Value<String> exerciseTitle = const Value.absent(),
             Value<CounterType> counterType = const Value.absent(),
             Value<String?> achievementCounts = const Value.absent(),
@@ -1492,6 +1553,7 @@ class $$RecordsTableTableManager extends RootTableManager<
             id: id,
             date: date,
             routineTitle: routineTitle,
+            tempRoutineId: tempRoutineId,
             exerciseTitle: exerciseTitle,
             counterType: counterType,
             achievementCounts: achievementCounts,
@@ -1501,6 +1563,7 @@ class $$RecordsTableTableManager extends RootTableManager<
             required String id,
             required DateTime date,
             required String routineTitle,
+            required String tempRoutineId,
             required String exerciseTitle,
             required CounterType counterType,
             Value<String?> achievementCounts = const Value.absent(),
@@ -1510,6 +1573,7 @@ class $$RecordsTableTableManager extends RootTableManager<
             id: id,
             date: date,
             routineTitle: routineTitle,
+            tempRoutineId: tempRoutineId,
             exerciseTitle: exerciseTitle,
             counterType: counterType,
             achievementCounts: achievementCounts,
