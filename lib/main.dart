@@ -10,7 +10,6 @@ import 'package:get_it/get_it.dart';
 import 'database/dao/record_dao.dart';
 import 'database/dao/routine_dao.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await initializeDateFormatting();
@@ -29,6 +28,7 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   static const String _title = APP_NAME;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -54,7 +54,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     RecordScreen(),
   ];
 
-  void _onItemTapped(int index){
+  void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
@@ -64,21 +64,35 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
+        surfaceTintColor: Colors.white,
         centerTitle: true,
-        title: Text(APP_NAME, style: TextStyle(color: ORANGE_COLOR, fontSize: 32.0, fontWeight: FontWeight.w600),),
+        title: Text(
+          APP_NAME,
+          style: TextStyle(
+              color: ORANGE_COLOR, fontSize: 32.0, fontWeight: FontWeight.w600),
+        ),
       ),
       // resizeToAvoidBottomInset: false,
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex), // Add some space
+      body: Container(
+          color: Colors.white,
+          child: Center(
+            child: _widgetOptions.elementAt(_selectedIndex), // Add some space
+          ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white,
         items: [
           BottomNavigationBarItem(
-            icon: _selectedIndex == 0 ? Icon(Icons.directions_run, color: ORANGE_COLOR) :  Icon(Icons.directions_run, color: GREY_COLOR),
+            icon: _selectedIndex == 0
+                ? Icon(Icons.directions_run, color: ORANGE_COLOR)
+                : Icon(Icons.directions_run, color: GREY_COLOR),
             label: EXERCISE,
           ),
           BottomNavigationBarItem(
-            icon: _selectedIndex == 1 ? Icon(Icons.edit_calendar, color: ORANGE_COLOR) :  Icon(Icons.edit_calendar, color: GREY_COLOR),
+            icon: _selectedIndex == 1
+                ? Icon(Icons.edit_calendar, color: ORANGE_COLOR)
+                : Icon(Icons.edit_calendar, color: GREY_COLOR),
             label: RECORD,
           ),
         ],
@@ -92,5 +106,3 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     );
   }
 }
-
-
