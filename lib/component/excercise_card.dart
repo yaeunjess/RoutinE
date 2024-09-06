@@ -6,38 +6,35 @@ class ExerciseCard extends StatelessWidget {
   final width;
   final height;
   final content;
-  final count;
+  List<int> count;
 
   // 생성자에서 매개변수를 받아옴
-  const ExerciseCard({
+  ExerciseCard({
     super.key,
     this.cardColor = BEIGE_COLOR,
     this.width = 140.0,
     this.height = 44.0,
-    this.content = "티바로우",
-    this.count = "20회"
+    required this.content,
+    required this.count,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 4.0),
-      child: Container(
-        width: width,
-        height: height,
-        decoration: BoxDecoration(
-            color: BEIGE_COLOR,
-            borderRadius: BorderRadius.circular(8.0)
-        ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('${content}'),
-          SizedBox(width:40.0),
-          Text('${count}')
-        ],
-      ),
-      )
-    );
+        padding: EdgeInsets.symmetric(horizontal: 4.0),
+        child: Container(
+          width: width,
+          height: height,
+          decoration: BoxDecoration(
+              color: BEIGE_COLOR, borderRadius: BorderRadius.circular(8.0)),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('${content}'),
+              SizedBox(width: 40.0),
+              Text(count.map((e) => e.toString()).join('/')),
+            ],
+          ),
+        ));
   }
 }

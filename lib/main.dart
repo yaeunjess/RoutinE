@@ -6,14 +6,23 @@ import 'package:routin_e/screen/record_screen.dart';
 import 'const/texts.dart';
 import 'package:get_it/get_it.dart';
 
+import 'database/dao/exercise_dao.dart';
+import 'database/dao/record_dao.dart';
+import 'database/dao/routine_dao.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await initializeDateFormatting();
 
   final database = AppDatabase(); //데이터베이스 생성
+  final exerciseDao = ExerciseDao(database); // Dao 생성
+  final routineDao = RoutineDao(database);
+  final recordDao = RecordDao(database);
   GetIt.I.registerSingleton<AppDatabase>(database);
-
+  GetIt.I.registerSingleton<ExerciseDao>(exerciseDao);
+  GetIt.I.registerSingleton<RoutineDao>(routineDao);
+  GetIt.I.registerSingleton<RecordDao>(recordDao);
   runApp(MyApp());
 }
 
