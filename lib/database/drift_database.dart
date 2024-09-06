@@ -72,7 +72,6 @@ class AppDatabase extends _$AppDatabase {
               title: Value('등 운동'),
             ),
           );
-
           // Insert Exercises
           await into(exercises).insert(
             ExercisesCompanion(
@@ -87,7 +86,6 @@ class AppDatabase extends _$AppDatabase {
               routineId: Value(routineId),
             ),
           );
-
           await into(exercises).insert(
             ExercisesCompanion(
               id: Value(uuid.v4()),
@@ -103,7 +101,6 @@ class AppDatabase extends _$AppDatabase {
           );
 
           final routineId2 = uuid.v4();
-
           // Insert Routine
           await into(routines).insert(
             RoutinesCompanion(
@@ -111,7 +108,6 @@ class AppDatabase extends _$AppDatabase {
               title: Value('팔 운동'),
             ),
           );
-
           // Insert Exercises
           await into(exercises).insert(
             ExercisesCompanion(
@@ -126,7 +122,6 @@ class AppDatabase extends _$AppDatabase {
               routineId: Value(routineId2),
             ),
           );
-
           await into(exercises).insert(
             ExercisesCompanion(
               id: Value(uuid.v4()),
@@ -140,8 +135,238 @@ class AppDatabase extends _$AppDatabase {
               routineId: Value(routineId2),
             ),
           );
+          await into(exercises).insert(
+            ExercisesCompanion(
+              id: Value(uuid.v4()),
+              title: Value('삼두'),
+              videoExists: Value(true),
+              videoURL: Value('https://youtu.be/OyAAq3qoGss?si=BM8XVG4PlGeuSOP5'),
+              counterType: Value(CounterType.isSingle), // Use enum name
+              targetCounts: Value('[20]'),
+              memoContent: Value('복압에 힘을 주자!'),
+              isAchieved: Value(false),
+              routineId: Value(routineId2),
+            ),
+          );
+          await into(exercises).insert(
+            ExercisesCompanion(
+              id: Value(uuid.v4()),
+              title: Value('이두'),
+              videoExists: Value(false),
+              videoURL: Value(null),
+              counterType: Value(CounterType.isDual), // Use enum name 에러나면 CounterType.isDual.name 으로 수정하기
+              targetCounts: Value('[20, 20]'),
+              memoContent: Value('코어에 집중하기!!'),
+              isAchieved: Value(false),
+              routineId: Value(routineId2),
+            ),
+          );
+          await into(exercises).insert(
+            ExercisesCompanion(
+              id: Value(uuid.v4()),
+              title: Value('삼두'),
+              videoExists: Value(true),
+              videoURL: Value('https://youtu.be/OyAAq3qoGss?si=BM8XVG4PlGeuSOP5'),
+              counterType: Value(CounterType.isSingle), // Use enum name
+              targetCounts: Value('[20]'),
+              memoContent: Value('복압에 힘을 주자!'),
+              isAchieved: Value(false),
+              routineId: Value(routineId2),
+            ),
+          );
+          await into(exercises).insert(
+            ExercisesCompanion(
+              id: Value(uuid.v4()),
+              title: Value('이두'),
+              videoExists: Value(false),
+              videoURL: Value(null),
+              counterType: Value(CounterType.isDual), // Use enum name 에러나면 CounterType.isDual.name 으로 수정하기
+              targetCounts: Value('[20, 20]'),
+              memoContent: Value('코어에 집중하기!!'),
+              isAchieved: Value(false),
+              routineId: Value(routineId2),
+            ),
+          );
 
-          final tempId = uuid.v4();
+          final routineId3 = uuid.v4();
+          // Insert Routine
+          await into(routines).insert(
+            RoutinesCompanion(
+              id: Value(routineId3),
+              title: Value('팔 운동'),
+            ),
+          );
+          // Insert Exercises
+          await into(exercises).insert(
+            ExercisesCompanion(
+              id: Value(uuid.v4()),
+              title: Value('삼두'),
+              videoExists: Value(true),
+              videoURL: Value('https://youtu.be/OyAAq3qoGss?si=BM8XVG4PlGeuSOP5'),
+              counterType: Value(CounterType.isSingle), // Use enum name
+              targetCounts: Value('[20]'),
+              memoContent: Value('복압에 힘을 주자!'),
+              isAchieved: Value(false),
+              routineId: Value(routineId3),
+            ),
+          );
+          await into(exercises).insert(
+            ExercisesCompanion(
+              id: Value(uuid.v4()),
+              title: Value('이두'),
+              videoExists: Value(false),
+              videoURL: Value(null),
+              counterType: Value(CounterType.isDual), // Use enum name 에러나면 CounterType.isDual.name 으로 수정하기
+              targetCounts: Value('[20, 20]'),
+              memoContent: Value('코어에 집중하기!!'),
+              isAchieved: Value(false),
+              routineId: Value(routineId3),
+            ),
+          );
+
+          final routineId4 = uuid.v4();
+          // Insert Routine
+          await into(routines).insert(
+            RoutinesCompanion(
+              id: Value(routineId4),
+              title: Value('팔 운동'),
+            ),
+          );
+          // Insert Exercises
+          await into(exercises).insert(
+            ExercisesCompanion(
+              id: Value(uuid.v4()),
+              title: Value('삼두'),
+              videoExists: Value(false),
+              videoURL: Value(null),
+              counterType: Value(CounterType.isSingle), // Use enum name
+              targetCounts: Value('[20]'),
+              memoContent: Value('복압에 힘을 주자!'),
+              isAchieved: Value(false),
+              routineId: Value(routineId4),
+            ),
+          );
+          await into(exercises).insert(
+            ExercisesCompanion(
+              id: Value(uuid.v4()),
+              title: Value('이두'),
+              videoExists: Value(false),
+              videoURL: Value(null),
+              counterType: Value(CounterType.isDual), // Use enum name 에러나면 CounterType.isDual.name 으로 수정하기
+              targetCounts: Value('[20, 20]'),
+              memoContent: Value('코어에 집중하기!!'),
+              isAchieved: Value(false),
+              routineId: Value(routineId4),
+            ),
+          );
+
+          final routineId5 = uuid.v4();
+          // Insert Routine
+          await into(routines).insert(
+            RoutinesCompanion(
+              id: Value(routineId5),
+              title: Value('팔 운동'),
+            ),
+          );
+          // Insert Exercises
+          await into(exercises).insert(
+            ExercisesCompanion(
+              id: Value(uuid.v4()),
+              title: Value('삼두'),
+              videoExists: Value(false),
+              videoURL: Value(null),
+              counterType: Value(CounterType.isSingle), // Use enum name
+              targetCounts: Value('[20]'),
+              memoContent: Value('복압에 힘을 주자!'),
+              isAchieved: Value(false),
+              routineId: Value(routineId5),
+            ),
+          );
+          await into(exercises).insert(
+            ExercisesCompanion(
+              id: Value(uuid.v4()),
+              title: Value('이두'),
+              videoExists: Value(false),
+              videoURL: Value(null),
+              counterType: Value(CounterType.isDual), // Use enum name 에러나면 CounterType.isDual.name 으로 수정하기
+              targetCounts: Value('[20, 20]'),
+              memoContent: Value('코어에 집중하기!!'),
+              isAchieved: Value(false),
+              routineId: Value(routineId5),
+            ),
+          );
+
+          final routineId6 = uuid.v4();
+          // Insert Routine
+          await into(routines).insert(
+            RoutinesCompanion(
+              id: Value(routineId6),
+              title: Value('팔 운동'),
+            ),
+          );
+          // Insert Exercises
+          await into(exercises).insert(
+            ExercisesCompanion(
+              id: Value(uuid.v4()),
+              title: Value('삼두'),
+              videoExists: Value(false),
+              videoURL: Value(null),
+              counterType: Value(CounterType.isSingle), // Use enum name
+              targetCounts: Value('[20]'),
+              memoContent: Value('복압에 힘을 주자!'),
+              isAchieved: Value(false),
+              routineId: Value(routineId6),
+            ),
+          );
+          await into(exercises).insert(
+            ExercisesCompanion(
+              id: Value(uuid.v4()),
+              title: Value('이두'),
+              videoExists: Value(false),
+              videoURL: Value(null),
+              counterType: Value(CounterType.isDual), // Use enum name 에러나면 CounterType.isDual.name 으로 수정하기
+              targetCounts: Value('[20, 20]'),
+              memoContent: Value('코어에 집중하기!!'),
+              isAchieved: Value(false),
+              routineId: Value(routineId6),
+            ),
+          );
+
+          final routineId7 = uuid.v4();
+          // Insert Routine
+          await into(routines).insert(
+            RoutinesCompanion(
+              id: Value(routineId7),
+              title: Value('팔 운동'),
+            ),
+          );
+          // Insert Exercises
+          await into(exercises).insert(
+            ExercisesCompanion(
+              id: Value(uuid.v4()),
+              title: Value('삼두'),
+              videoExists: Value(false),
+              videoURL: Value(null),
+              counterType: Value(CounterType.isSingle), // Use enum name
+              targetCounts: Value('[20]'),
+              memoContent: Value('복압에 힘을 주자!'),
+              isAchieved: Value(false),
+              routineId: Value(routineId7),
+            ),
+          );
+          await into(exercises).insert(
+            ExercisesCompanion(
+              id: Value(uuid.v4()),
+              title: Value('이두'),
+              videoExists: Value(false),
+              videoURL: Value(null),
+              counterType: Value(CounterType.isDual), // Use enum name 에러나면 CounterType.isDual.name 으로 수정하기
+              targetCounts: Value('[20, 20]'),
+              memoContent: Value('코어에 집중하기!!'),
+              isAchieved: Value(false),
+              routineId: Value(routineId7),
+            ),
+          );
 
           // Insert Records
           final temp = Value(uuid.v4());
@@ -156,7 +381,6 @@ class AppDatabase extends _$AppDatabase {
               achievementCounts: Value('[15]'), // Example counts
             ),
           );
-
           await into(records).insert(
             RecordsCompanion(
               id: Value(uuid.v4()),
@@ -168,7 +392,6 @@ class AppDatabase extends _$AppDatabase {
               achievementCounts: Value('[15]'), // Example counts
             ),
           );
-
           await into(records).insert(
             RecordsCompanion(
               id: Value(uuid.v4()),
@@ -180,7 +403,6 @@ class AppDatabase extends _$AppDatabase {
               achievementCounts: Value('[15]'), // Example counts
             ),
           );
-
           await into(records).insert(
             RecordsCompanion(
               id: Value(uuid.v4()),

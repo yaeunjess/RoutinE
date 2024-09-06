@@ -40,7 +40,7 @@ class RoutineCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(4.0),
+                    padding: const EdgeInsets.only(left: 8.0),
                     child: Text(
                       routineTitle,
                       style: TextStyle(
@@ -51,15 +51,15 @@ class RoutineCard extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(4.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: GestureDetector(
                       onTap: () {
                         print('아이콘이 눌렸습니다.');
                       },
                       child: Image.asset(
                         'assets/img/icon_threedots.png',
-                        width: 20,
-                        height: 20,
+                        width: 18,
+                        height: 18,
                         color: Colors.black,
                       ),
                     ),
@@ -77,7 +77,7 @@ class RoutineCard extends StatelessWidget {
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 12.0,
-                        color: GREY_COLOR,
+                        color: Colors.black54,
                       ),
                     ),
                   ],

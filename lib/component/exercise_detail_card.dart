@@ -17,7 +17,7 @@ class ExerciseDetailCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SingleChildScrollView(
       child: Column(
         children: [
           Text(
@@ -49,7 +49,8 @@ class ExerciseDetailCard extends StatelessWidget {
                   if (exercise.counterType == CounterType.isDual)
                     Container(
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black45, style: BorderStyle.solid),
+                        border: Border.all(
+                            color: Colors.black45, style: BorderStyle.solid),
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       child: Row(
