@@ -7,11 +7,20 @@ import '../const/colors.dart';
 // 2) target(필수x, 기본값 0) : 목표가 몇 개인가 -> _countNumber를 초과하면
 // 3) fontSize (필수x, 기본값 150.0) : 타이머 유형에 따라 글자 크기가 조정하기 위함
 class Counter extends StatefulWidget {
+  final double width;
+  final double height;
   final bool targetExists;
   final int target;
-  final double fontSize;
 
-  const Counter({super.key, required this.targetExists, this.target = 0, this.fontSize = 150.0});
+
+  const Counter({
+    super.key,
+    required this.width,
+    required this.height,
+    required this.targetExists,
+    this.target = 0,
+  });
+
 
   @override
   State<Counter> createState() => _CounterState();
@@ -30,23 +39,41 @@ class _CounterState extends State<Counter> {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
-        //targetExists = false일 때  color 처리해주기
-        color: _countNumber >= _target ? BLUE_COLOR : Colors.transparent,
-        child: Center(
-          child: Column(
-            children: [
-              Text("${_countNumber}", style: TextStyle(fontWeight: FontWeight.w800, fontSize: widget.fontSize)),
-            ],
-          ),
+        width: widget.width,
+        height: widget.height,
+        decoration: BoxDecoration(
+          color: _countNumber >= _target ? BLUE_COLOR : Colors.transparent,
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              "${_countNumber}",
+              style: TextStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: 124.0,
+                color: _countNumber >= _target ? Colors.white : Colors.black,
+              ),
+            ),
+            Text(
+              "꾹 누르면 0으로 초기화 됩니다.",
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 12.0,
+                color: Colors.black45,
+              ),
+            ),
+          ],
         ),
       ),
-      onLongPress: setCountToTarget,
+      onLongPress: setCountToZero,
       onTap: increaseCount,
-
     );
   }
 
-  void setCountToTarget() {
+  void setCountToZero() {
     setState(() {
       _countNumber = 0;
     });

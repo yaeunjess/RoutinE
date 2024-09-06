@@ -21,7 +21,7 @@ class RecordDao extends DatabaseAccessor<AppDatabase> with _$RecordDaoMixin {
   Future<List<Record>> getAllRecords() => select(records).get();
 
   // 특정 날짜에 해당하는 Record 가져오기
-  Future<List<Record>> getRecordsByDate(DateTime date) {
+  Future<List<Record>> getRecordsByDate(DateTime date){
     return (select(records)
       ..where((tbl) => tbl.date.equals(date))
     ).get();

@@ -49,6 +49,7 @@ dependencies:
 
   dio: ^5.6.0 # 네트워크 요청을 가능하게 하는 플러그인
   uuid: ^4.4.2 # UUID를 생성하는 플러그인
+  youtube_player_flutter: 8.1.0 # Youtube Player
   flutter_localizations:
     sdk: flutter
 
@@ -81,7 +82,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
+  assets:
+    - assets/img/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

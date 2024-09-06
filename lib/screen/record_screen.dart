@@ -4,8 +4,9 @@ import 'package:routin_e/component/excercise_card.dart';
 import '../component/calendar.dart';
 import '../component/routine_record.dart';
 import '../database/dao/record_dao.dart';
+import '../repository/record_repository.dart';
 import '../database/drift_database.dart';
-import 'package:routin_e/repository/record_repository.dart';
+
 
 class RecordScreen extends StatefulWidget {
   const RecordScreen({super.key});
@@ -52,16 +53,17 @@ class _RecordScreenState extends State<RecordScreen> {
             // 만약에 데이터가 없을 경우 어떻게 됨..??? null 처리에 대해 알아보기
             final Set<String> routineIdsList = fetchRoutineIdsByDate(selectedDate, recordsByDate);
             return Column(
-                  // 반복문
-                  children: routineIdsList.map((routineId) {
-                    return RoutineRecord(
-                      tempRoutineId: routineId,
-                      recordList: recordsByDate,
-                    );
-                  }).toList(),
+              // 반복문
+              children: routineIdsList.map((routineId) {
+                return RoutineRecord(
+                  tempRoutineId: routineId,
+                  recordList: recordsByDate,
                 );
-              },
+              }).toList(),
+            );
+          },
         ),
+
       ],
     );
   }
