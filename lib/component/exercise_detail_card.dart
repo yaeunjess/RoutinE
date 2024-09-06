@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:routin_e/component/custom_youtube_player.dart';
+import 'package:routin_e/model/counter_type.dart';
 
 import '../database/drift_database.dart';
 import 'counter.dart';
@@ -19,35 +20,81 @@ class ExerciseDetailCard extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: CustomYoutubePlayer(
-            videoTitle: exercise.title,
-            videoURL: exercise.videoURL,
-            ),
+          Text(
+            exercise.title,
+            style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w600),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '목표 ${exercise.targetCounts}회',
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.w600,
+          if (exercise.videoExists)
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CustomYoutubePlayer(
+                videoTitle: exercise.title,
+                videoURL: exercise.videoURL,
+              ),
+            ),
+          if (exercise.counterType != CounterType.noCounter)
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '목표 ${exercise.targetCounts}회',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-                Counter(
-                  width: double.infinity,
-                  height: 300,
-                  targetExists: true,
-                  target: 20,
-                ),
-              ],
+                  if (exercise.counterType == CounterType.isDual)
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black45, style: BorderStyle.solid),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Counter(
+                              width: double.infinity,
+                              height: 300,
+                              targetExists: true,
+                              target: 20,
+                            ),
+                          ),
+                          Container(
+                            width: 1,
+                            height: 68,
+                            color: Colors.black45,
+                          ),
+                          Expanded(
+                            child: Counter(
+                              width: double.infinity,
+                              height: 300,
+                              targetExists: true,
+                              target: 20,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  else
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                            color: Colors.black45, style: BorderStyle.solid),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: Counter(
+                        width: double.infinity,
+                        height: 300,
+                        targetExists: true,
+                        target: 20,
+                      ),
+                    ),
+                ],
+              ),
             ),
-          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(

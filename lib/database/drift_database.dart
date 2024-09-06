@@ -141,11 +141,13 @@ class AppDatabase extends _$AppDatabase {
             ),
           );
 
+          final tempId = uuid.v4();
           // Insert Records
           await into(records).insert(
             RecordsCompanion(
               id: Value(uuid.v4()),
               date: Value(DateTime.now()), // Current date for example
+              tempRoutineId: Value(tempId),
               routineTitle: Value('등 운동'),
               exerciseTitle: Value('랫풀다운'),
               counterType: Value(CounterType.isSingle), // Use enum name 에러나면 CounterType.isSingle.name 으로 수정하기
@@ -157,6 +159,7 @@ class AppDatabase extends _$AppDatabase {
             RecordsCompanion(
               id: Value(uuid.v4()),
               date: Value(DateTime.now().subtract(Duration(days: 1))), // One day before for example
+              tempRoutineId: Value(tempId),
               routineTitle: Value('등 운동'),
               exerciseTitle: Value('원암덤벨로우'),
               counterType: Value(CounterType.isDual), // Use enum name  // 에러 나면 CounterType.isDual.name 으로 수정하기
