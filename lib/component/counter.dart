@@ -41,7 +41,6 @@ class _CounterState extends State<Counter> {
         height: widget.height,
         decoration: BoxDecoration(
           color: _countNumber >= _target ? BLUE_COLOR : Colors.transparent,
-          border: Border.all(color: Colors.black45, style: BorderStyle.solid),
           borderRadius: BorderRadius.circular(8.0),
         ),
         child: Column(
@@ -60,7 +59,7 @@ class _CounterState extends State<Counter> {
               "꾹 누르면 0으로 초기화 됩니다.",
               style: TextStyle(
                 fontWeight: FontWeight.w500,
-                fontSize: 14.0,
+                fontSize: 12.0,
                 color: Colors.black45,
               ),
             ),

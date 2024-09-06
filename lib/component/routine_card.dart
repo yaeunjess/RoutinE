@@ -44,35 +44,47 @@ class RoutineCard extends StatelessWidget {
                     child: Text(
                       routineTitle,
                       style: TextStyle(
-                          fontWeight: FontWeight.w600, fontSize: 20.0),
+                          fontWeight: FontWeight.w600,
+                          fontSize: 20.0
+                      ),
                       textAlign: TextAlign.right,
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(4.0),
-                    child: Icon(Icons.add, color: Colors.black),
+                    child: GestureDetector(
+                      onTap: () {
+                        print('아이콘이 눌렸습니다.');
+                      },
+                      child: Image.asset(
+                        'assets/img/icon_threedots.png',
+                        width: 20,
+                        height: 20,
+                        color: Colors.black,
+                      ),
+                    ),
                   ),
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.all(4.0),
+                padding: const EdgeInsets.only(right: 8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: exerciseTitles
-                      .map((title) => Text(
-                            title,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 12.0,
-                                color: GREY_COLOR),
-                          ))
-                      .toList(),
+                  children:[
+                    Text(
+                      exerciseTitles.join(', '),
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 12.0,
+                        color: GREY_COLOR,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
           ),
-        )
-    );
+        ));
   }
 }

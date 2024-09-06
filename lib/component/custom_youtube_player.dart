@@ -55,14 +55,11 @@ class _CustomYoutubePlayerState extends State<CustomYoutubePlayer> {
         YoutubePlayer(
           controller: controller!,
           showVideoProgressIndicator: true,
-        ),
-        Text(
-            widget.videoTitle,
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 16.0,
-              fontWeight: FontWeight.w500,
-            ),
+          progressColors: ProgressBarColors(
+            playedColor: Colors.red,
+            handleColor: Colors.redAccent,
+            backgroundColor: Colors.grey,
+          ),
         ),
       ],
     );
