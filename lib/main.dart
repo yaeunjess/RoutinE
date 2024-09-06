@@ -16,7 +16,7 @@ void main() async {
   // await initializeDateFormatting();
 
   final database = AppDatabase(); //데이터베이스 생성
-  final exerciseDao = ExerciseDao(database);
+  final exerciseDao = ExerciseDao(database); // Dao 생성
   final routineDao = RoutineDao(database);
   final recordDao = RecordDao(database);
   GetIt.I.registerSingleton<AppDatabase>(database);

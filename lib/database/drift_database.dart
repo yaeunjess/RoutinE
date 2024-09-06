@@ -39,7 +39,7 @@ class Records extends Table {
   TextColumn get id => text()();
   DateTimeColumn get date => dateTime()();
   TextColumn get routineTitle => text()();
-  TextColumn get tempRoutineId => text()();// add this line
+  TextColumn get tempRoutineId => text()();
   TextColumn get exerciseTitle => text()();
   TextColumn get counterType => textEnum<CounterType>()();
   TextColumn get achievementCounts => text().nullable()();
@@ -142,12 +142,14 @@ class AppDatabase extends _$AppDatabase {
           );
 
           final tempId = uuid.v4();
+
           // Insert Records
+          final temp = Value(uuid.v4());
           await into(records).insert(
             RecordsCompanion(
               id: Value(uuid.v4()),
-              date: Value(DateTime.now()), // Current date for example
-              tempRoutineId: Value(tempId),
+              date:Value(DateTime(DateTime.now().year,DateTime.now().month, DateTime.now().day)),
+              tempRoutineId: temp,// Current date for example
               routineTitle: Value('등 운동'),
               exerciseTitle: Value('랫풀다운'),
               counterType: Value(CounterType.isSingle), // Use enum name 에러나면 CounterType.isSingle.name 으로 수정하기
@@ -158,8 +160,45 @@ class AppDatabase extends _$AppDatabase {
           await into(records).insert(
             RecordsCompanion(
               id: Value(uuid.v4()),
-              date: Value(DateTime.now().subtract(Duration(days: 1))), // One day before for example
-              tempRoutineId: Value(tempId),
+              date:Value(DateTime(DateTime.now().year,DateTime.now().month, DateTime.now().day)),
+              tempRoutineId: temp,// Current date for example
+              routineTitle: Value('등 운동'),
+              exerciseTitle: Value('랫풀다운'),
+              counterType: Value(CounterType.isSingle), // Use enum name 에러나면 CounterType.isSingle.name 으로 수정하기
+              achievementCounts: Value('[15]'), // Example counts
+            ),
+          );
+
+          await into(records).insert(
+            RecordsCompanion(
+              id: Value(uuid.v4()),
+              date:Value(DateTime(DateTime.now().year,DateTime.now().month, DateTime.now().day)),
+              tempRoutineId: temp,// Current date for example
+              routineTitle: Value('등 운동'),
+              exerciseTitle: Value('랫풀다운'),
+              counterType: Value(CounterType.isSingle), // Use enum name 에러나면 CounterType.isSingle.name 으로 수정하기
+              achievementCounts: Value('[15]'), // Example counts
+            ),
+          );
+
+          await into(records).insert(
+            RecordsCompanion(
+              id: Value(uuid.v4()),
+              date:Value(DateTime(DateTime.now().year,DateTime.now().month, DateTime.now().day)),
+              tempRoutineId: temp,// Current date for example
+              routineTitle: Value('등 운동'),
+              exerciseTitle: Value('랫풀다운'),
+              counterType: Value(CounterType.isSingle), // Use enum name 에러나면 CounterType.isSingle.name 으로 수정하기
+              achievementCounts: Value('[15]'), // Example counts
+            ),
+          );
+
+          final yesterday = DateTime.now().subtract(Duration(days:1));
+          await into(records).insert(
+            RecordsCompanion(
+              id: Value(uuid.v4()),
+              date: Value(DateTime(yesterday.year,yesterday.month, yesterday.day)), // One day before for example
+              tempRoutineId: temp,
               routineTitle: Value('등 운동'),
               exerciseTitle: Value('원암덤벨로우'),
               counterType: Value(CounterType.isDual), // Use enum name  // 에러 나면 CounterType.isDual.name 으로 수정하기
