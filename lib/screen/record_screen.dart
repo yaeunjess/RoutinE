@@ -32,39 +32,42 @@ class _RecordScreenState extends State<RecordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Calendar(
-          selectedDate: selectedDate,
-          onDaySelected: onDaySelected,
-        ),
-        FutureBuilder<List<Record>>(
-          future: recordDao.getRecordsByDate(DateTime(selectedDate.year, selectedDate.month, selectedDate.day)),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator()); // 로딩 중
-            } else if (snapshot.hasError) {
-              return Center(child: Text('Error: ${snapshot.error}')); // 오류 발생 시 처리
-            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return Center(child: Text('No exercises found.')); // 데이터가 없을 때 처리
-            }
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Calendar(
+            selectedDate: selectedDate,
+            onDaySelected: onDaySelected,
+          ),
+          FutureBuilder<List<Record>>(
+            future: recordDao.getRecordsByDate(DateTime(selectedDate.year, selectedDate.month, selectedDate.day)),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator()); // 로딩 중
+              } else if (snapshot.hasError) {
+                return Center(child: Text('Error: ${snapshot.error}')); // 오류 발생 시 처리
+              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                return Center(child: Text('No exercises found.')); // 데이터가 없을 때 처리
+              }
 
-            final recordsByDate = snapshot.data!; // 데이터가 있을 경우 List<Record>를 가져옴
-            // 만약에 데이터가 없을 경우 어떻게 됨..??? null 처리에 대해 알아보기
-            final Set<String> routineIdsList = fetchRoutineIdsByDate(selectedDate, recordsByDate);
-            return Column(
-              // 반복문
-              children: routineIdsList.map((routineId) {
-                return RoutineRecord(
-                  tempRoutineId: routineId,
-                  recordList: recordsByDate,
-                );
-              }).toList(),
-            );
-          },
-        ),
-
-      ],
+              final recordsByDate = snapshot.data!; // 데이터가 있을 경우 List<Record>를 가져옴
+              // 만약에 데이터가 없을 경우 어떻게 됨..??? null 처리에 대해 알아보기
+              final Set<String> routineIdsList = fetchRoutineIdsByDate(selectedDate, recordsByDate);
+              return Column(
+                // 반복문
+                children: routineIdsList.map((routineId) {
+                  return RoutineRecord(
+                    tempRoutineId: routineId,
+                    recordList: recordsByDate,
+                  );
+                }).toList(),
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 

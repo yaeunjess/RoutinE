@@ -161,6 +161,42 @@ class AppDatabase extends _$AppDatabase {
             RecordsCompanion(
               id: Value(uuid.v4()),
               date:Value(DateTime(DateTime.now().year,DateTime.now().month, DateTime.now().day)),
+              tempRoutineId: Value(uuid.v4()),// Current date for example
+              routineTitle: Value('등 운동'),
+              exerciseTitle: Value('랫풀다운'),
+              counterType: Value(CounterType.isSingle), // Use enum name 에러나면 CounterType.isSingle.name 으로 수정하기
+              achievementCounts: Value('[15]'), // Example counts
+            ),
+          );
+          await into(records).insert(
+            RecordsCompanion(
+              id: Value(uuid.v4()),
+              date:Value(DateTime(DateTime.now().year,DateTime.now().month, DateTime.now().day)),
+              tempRoutineId: Value(uuid.v4()),// Current date for example
+              routineTitle: Value('등 운동'),
+              exerciseTitle: Value('랫풀다운'),
+              counterType: Value(CounterType.isSingle), // Use enum name 에러나면 CounterType.isSingle.name 으로 수정하기
+              achievementCounts: Value('[15]'), // Example counts
+            ),
+          );
+
+          await into(records).insert(
+            RecordsCompanion(
+              id: Value(uuid.v4()),
+              date:Value(DateTime(DateTime.now().year,DateTime.now().month, DateTime.now().day)),
+              tempRoutineId: Value(uuid.v4()),// Current date for example
+              routineTitle: Value('등 운동'),
+              exerciseTitle: Value('랫풀다운'),
+              counterType: Value(CounterType.isSingle), // Use enum name 에러나면 CounterType.isSingle.name 으로 수정하기
+              achievementCounts: Value('[15]'), // Example counts
+            ),
+          );
+
+
+          await into(records).insert(
+            RecordsCompanion(
+              id: Value(uuid.v4()),
+              date:Value(DateTime(DateTime.now().year,DateTime.now().month, DateTime.now().day)),
               tempRoutineId: temp,// Current date for example
               routineTitle: Value('등 운동'),
               exerciseTitle: Value('랫풀다운'),
