@@ -33,7 +33,7 @@ class RoutineRecord extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
-              child: Text("등운동"),
+              child: Text(fetchRoutineNameByTempRoutineId(tempRoutineId, recordList), style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500,),),
             ),
           ],
         ),
