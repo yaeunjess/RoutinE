@@ -34,3 +34,9 @@ import 'dart:convert';
     return {title: intList};
   }
 
+  String fetchRoutineNameByTempRoutineId(String tempRoutineId, List<Record> recordList){
+    final filteredRecordsByTempRoutineId = recordList.where((record) => record.tempRoutineId == tempRoutineId)
+        .toList();
+    return filteredRecordsByTempRoutineId[0] != null ? filteredRecordsByTempRoutineId[0].routineTitle : "루틴" ;
+  }
+

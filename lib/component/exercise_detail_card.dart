@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:routin_e/component/custom_youtube_player.dart';
@@ -40,7 +42,7 @@ class ExerciseDetailCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '목표 ${exercise.targetCounts}회',
+                    '목표 ${jsonToStringList(exercise.targetCounts)}회',
                     style: TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.w600,
@@ -53,28 +55,37 @@ class ExerciseDetailCard extends StatelessWidget {
                             color: Colors.black45, style: BorderStyle.solid),
                         borderRadius: BorderRadius.circular(8.0),
                       ),
-                      child: Row(
+                      child: Stack(
+                        alignment: Alignment.center,
                         children: [
-                          Expanded(
-                            child: Counter(
-                              width: double.infinity,
-                              height: 300,
-                              targetExists: true,
-                              target: 20,
-                            ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Counter(
+                                  width: double.infinity,
+                                  height: 300,
+                                  targetExists: true,
+                                  target: 20,
+                                  borderTopRight: 0,
+                                  borderBottomRight: 0,
+                                ),
+                              ),
+                              Expanded(
+                                child: Counter(
+                                  width: double.infinity,
+                                  height: 300,
+                                  targetExists: true,
+                                  target: 20,
+                                  borderTopLeft: 0,
+                                  borderBottomLeft: 0,
+                                ),
+                              ),
+                            ],
                           ),
                           Container(
                             width: 1,
                             height: 68,
                             color: Colors.black45,
-                          ),
-                          Expanded(
-                            child: Counter(
-                              width: double.infinity,
-                              height: 300,
-                              targetExists: true,
-                              target: 20,
-                            ),
                           ),
                         ],
                       ),
@@ -121,5 +132,15 @@ class ExerciseDetailCard extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+String jsonToStringList(String? jsonList) {
+  if (jsonList == null){
+    return "";
+  }
+  else {
+    List<int> parts = List<int>.from(jsonDecode(jsonList));
+    return parts.map((e) => e.toString()).join('/');
   }
 }

@@ -7,7 +7,6 @@ import '../database/dao/record_dao.dart';
 import '../repository/record_repository.dart';
 import '../database/drift_database.dart';
 
-
 class RecordScreen extends StatefulWidget {
   const RecordScreen({super.key});
 
@@ -32,43 +31,56 @@ class _RecordScreenState extends State<RecordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Calendar(
-            selectedDate: selectedDate,
-            onDaySelected: onDaySelected,
-          ),
-          FutureBuilder<List<Record>>(
-            future: recordDao.getRecordsByDate(DateTime(selectedDate.year, selectedDate.month, selectedDate.day)),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator()); // 로딩 중
-              } else if (snapshot.hasError) {
-                return Center(child: Text('Error: ${snapshot.error}')); // 오류 발생 시 처리
-              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                return Center(child: Text('No exercises found.')); // 데이터가 없을 때 처리
-              }
+    return Align(
+        alignment: Alignment.topCenter, // 자식이 상단에 정렬되도록 설정
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Calendar(
+                selectedDate: selectedDate,
+                onDaySelected: onDaySelected,
+              ),
+              SizedBox(height:12),
+              FutureBuilder<List<Record>>(
+                future: recordDao.getRecordsByDate(DateTime(
+                    selectedDate.year, selectedDate.month, selectedDate.day)),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator()); // 로딩 중
+                  } else if (snapshot.hasError) {
+                    return Center(
+                        child: Text('Error: ${snapshot.error}')); // 오류 발생 시 처리
+                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return Center(
+                        child: Text('No exercises found.')); // 데이터가 없을 때 처리
+                  }
 
-              final recordsByDate = snapshot.data!; // 데이터가 있을 경우 List<Record>를 가져옴
-              // 만약에 데이터가 없을 경우 어떻게 됨..??? null 처리에 대해 알아보기
-              final Set<String> routineIdsList = fetchRoutineIdsByDate(selectedDate, recordsByDate);
-              return Column(
-                // 반복문
-                children: routineIdsList.map((routineId) {
-                  return RoutineRecord(
-                    tempRoutineId: routineId,
-                    recordList: recordsByDate,
+                  final recordsByDate =
+                      snapshot.data!; // 데이터가 있을 경우 List<Record>를 가져옴
+                  // 만약에 데이터가 없을 경우 어떻게 됨..??? null 처리에 대해 알아보기
+                  final Set<String> routineIdsList =
+                      fetchRoutineIdsByDate(selectedDate, recordsByDate);
+                  return Column(
+                    // 반복문
+                    children: routineIdsList.map((routineId) {
+                      return Column(children: [
+                        RoutineRecord(
+                          tempRoutineId: routineId,
+                          recordList: recordsByDate,
+                        ),
+                        SizedBox(
+                          height: 16,
+                        )
+                      ]);
+                    }).toList(),
                   );
-                }).toList(),
-              );
-            },
+                },
+              ),
+            ],
           ),
-        ],
-      ),
-    );
+        ));
   }
 
   // 날짜 선택 시 호출되는 메서드
