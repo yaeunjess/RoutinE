@@ -4,22 +4,33 @@ import 'package:routin_e/const/colors.dart';
 
 class CustomTextField extends StatelessWidget {
   final double width;
+  final double? height;
   final TextInputType inputType;
   final int maxLines;
   final String? hintText;
+  final bool isTextValid;
 
   const CustomTextField({
     super.key,
     required this.inputType,
     required this.width,
+    this.height,
     required this.maxLines,
     this.hintText,
+    this.isTextValid = true,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: width,
+      //높이 지정
+      constraints: height != null
+          ? BoxConstraints(
+        minHeight: height!,
+        maxHeight: height!,
+      )
+          : const BoxConstraints.tightFor(),
       child: Material(
         child: TextFormField(
           cursorColor: GREY_COLOR,
@@ -41,21 +52,21 @@ class CustomTextField extends StatelessWidget {
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8.0),
               borderSide: BorderSide(
-                color: Colors.black45,
+                color: isTextValid ? Colors.black45 : Colors.red,
                 width: 1.0,
               ),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8.0),
               borderSide: BorderSide(
-                color:Colors.black45,
+                color:isTextValid ? Colors.black45 : Colors.red,
                 width: 1.0,
               ),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8.0),
               borderSide: BorderSide(
-                color: Colors.black45,
+                color: isTextValid ? Colors.black45 : Colors.red,
                 width: 2.0,
               ),
             ),

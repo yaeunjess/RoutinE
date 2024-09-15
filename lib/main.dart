@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:routin_e/const/colors.dart';
 import 'package:routin_e/database/dao/exercise_dao.dart';
 import 'package:routin_e/database/drift_database.dart';
+import 'package:routin_e/provider/record_provider.dart';
 import 'package:routin_e/screen/routine_screen.dart';
 import 'package:routin_e/screen/record_screen.dart';
 import 'const/texts.dart';
@@ -22,7 +24,6 @@ void main() async {
   GetIt.I.registerSingleton<ExerciseDao>(exerciseDao);
   GetIt.I.registerSingleton<RoutineDao>(routineDao);
   GetIt.I.registerSingleton<RecordDao>(recordDao);
-
   runApp(MyApp());
 }
 
